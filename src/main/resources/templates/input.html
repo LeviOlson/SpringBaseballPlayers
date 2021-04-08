@@ -3,10 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert New Player</title>
+
+<script type = "text/javascript">
+        
+function checkForm(form)
+	{
+	  if(isNaN(form.number.value) || form.number.value > 99 || form.number.value < 0) {
+	     alert("Error: number must be a number between 0 and 99");
+	     form.number.focus();
+	     return false;
+	  }
+	 
+	  if(form.fname.value === "") {
+		     alert("Error: first name must not be empty");
+		     form.fname.focus();
+		     return false;
+		  }
+	
+	if(form.lname.value === "") {
+	    alert("Error: last name must not be empty");
+	    form.lname.focus();
+	    return false;
+	 }
+	return true;
+	}
+        
+      </script>
 </head>
+
 <body>
-<form th:object="${newPlayer}"
-th:action="@{/update/{id}(id=${newPlayer.id})}" method=POST>
+<form th:object="${newPlayer}" 
+th:action="@{/update/{id}(id=${newPlayer.id})}" method=POST onsubmit="return checkForm(this);">
 fname: <input name="fname" size="20" th:field="*{fname}"><br />
 lname: <input name="lname" size="20" th:field="*{lname}"><br />
 number: <input name="number" size="20" th:field="*{number}"><br />
